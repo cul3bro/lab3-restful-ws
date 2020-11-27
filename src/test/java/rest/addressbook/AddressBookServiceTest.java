@@ -344,6 +344,13 @@ public class AddressBookServiceTest {
 
     //Is not safe
     assertNotEquals(2, ab.getPersonList().size());
+
+    /*
+    BUG: There can be several users with the same id. So if we delete several users
+    with the same id, it will return a 204 whenever there is a user with that id,
+    instead of a 404 error that it would return when trying to delete the user with
+    that id a second time. This should not happen as the id should be unique for each user.
+    */
   }
 
   @Test
